@@ -39,7 +39,6 @@
 
   var validarNumeroDeCaracteres = function () {
     var $botonEnviar = $("#enviar");
-    console.log($(this));
     if ($(this).val().trim().length > 140) {
       $("#contador").text(contador);
       contador--;
