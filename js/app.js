@@ -10,7 +10,7 @@
     $("#formulario").submit(agregarTweet);
     $("#tweet").keyup(validarNumeroDeCaracteres);
     $("#tweet").keyup(caracteresRestantes);
-    console.log(event);
+    $("#tweet").keyup(colorAlerta);
   };
 
   var agregarTweet = function (e) {
@@ -33,30 +33,43 @@
     // Limpiar textArea
     $mensajeContenedor.val(" ");
     $botonEnviar.attr("disabled", true);
+    contador = 140;
+    $("#contador").text(contador);
   };
 
   var validarNumeroDeCaracteres = function () {
     var $botonEnviar = $("#enviar");
     console.log($(this));
-    if ($(this).val().trim().length > 0) {
+    if ($(this).val().trim().length > 140) {
       $("#contador").text(contador);
       contador--;
+      $botonEnviar.attr("disabled", true);
+    } else if ($(this).val().trim().length > 0){
       $botonEnviar.removeAttr("disabled");
     } else {
       $botonEnviar.attr("disabled", true);
-    };
+    }
   };
 
   var caracteresRestantes = function () {
 
-    var contadorCaracteres = 0;
+    var caracteresMenos = 0;
     var maximoCaracteres = 140;
 
-    contadorCaracteres = $("#tweet").val().length;
+    caracteresMenos = $("#tweet").val().length;
 
-    var totalCaracteres = maximoCaracteres - contadorCaracteres;
+    var totalCaracteres = maximoCaracteres - caracteresMenos;
 
     $("#contador").text(totalCaracteres);
+  };
+  
+  var colorAlerta = function() {
+    var $imprContador = $("#alerta");
+    if($(this).val().trim().length > 129) {
+      $imprContador.css("color", "red");
+    } else if ($(this).val().trim().length > 119) {
+      $imprContador.css("color", "orange");
+    }
   };
 
 
